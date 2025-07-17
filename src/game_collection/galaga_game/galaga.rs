@@ -24,7 +24,7 @@ use std::collections::VecDeque;
 #[derive(Debug, Default, Clone)]
 pub struct GameState {
     pub player: Option<Player>,
-    pub enemies: Vec<Enemy>,
+    //pub enemies: Vec<Enemy>,
     pub bullets: Vec<Bullet>,
     pub explosions: Vec<Explosion>,
     pub interval: Option<Instant>,
@@ -46,7 +46,7 @@ impl GameState {
         
         GameState {
             player: None,
-            enemies: Vec::new(),
+            //enemies: Vec::new(),
             bullets: Vec::new(),
             explosions: Vec::new(),
             interval: Some(Instant::now()),
@@ -159,25 +159,25 @@ impl Galaga {
             gamestate.player = player;
 
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
-            let mut enemies = gamestate.enemies.clone();
+            //let mut enemies = gamestate.enemies.clone();
             
-            if enemies.is_empty() {
-                let patterns = [
-                    EnemyPatterns::Star,
-                    EnemyPatterns::Triangle,
-                    EnemyPatterns::Circle,
-                ];
-                let mut rng = thread_rng();
-                let pattern = &patterns[rng.gen_range(0..patterns.len())];
-                let new_enemies = pattern.get(ctx, gameboard).into_iter()
-                    .map(|(s, id)| Enemy::new(ctx, gameboard, s, id)).collect::<Vec<Enemy>>();
-                enemies = new_enemies;
-            }
+            // if enemies.is_empty() {
+            //     let patterns = [
+            //         EnemyPatterns::Star,
+            //         EnemyPatterns::Triangle,
+            //         EnemyPatterns::Circle,
+            //     ];
+            //     let mut rng = thread_rng();
+            //     let pattern = &patterns[rng.gen_range(0..patterns.len())];
+            //     let new_enemies = pattern.get(ctx, gameboard).into_iter()
+            //         .map(|(s, id)| Enemy::new(ctx, gameboard, s, id)).collect::<Vec<Enemy>>();
+            //     enemies = new_enemies;
+            // }
+            //
+            // enemies.iter_mut().for_each(|e| e.react(ctx, gameboard));
 
-            enemies.iter_mut().for_each(|e| e.react(ctx, gameboard));
-
-            let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
-            gamestate.enemies = enemies;
+            // let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
+            // gamestate.enemies = enemies;
 
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
             let mut bullets = gamestate.bullets.clone();
@@ -225,7 +225,7 @@ impl Galaga {
                     let dim = enemy.dimensions().clone();
 
                     let gamestate = &mut ctx.state().get_mut_or_default::<GameState>();
-                    gamestate.enemies.retain_mut(|e| e.id() != *a);
+                    //gamestate.enemies.retain_mut(|e| e.id() != *a);
                     gameboard.remove_sprite_by_id(a);
 
                     let explosion = Explosion::new(ctx, gameboard, pos, dim);
@@ -242,7 +242,7 @@ impl Galaga {
                     let dim = enemy.dimensions().clone();
 
                     let gamestate = &mut ctx.state().get_mut_or_default::<GameState>();
-                    gamestate.enemies.retain_mut(|e| e.id() != *b);
+                    //gamestate.enemies.retain_mut(|e| e.id() != *b);
                     gameboard.remove_sprite_by_id(b);
 
                     let explosion = Explosion::new(ctx, gameboard, pos, dim);
