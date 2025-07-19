@@ -48,7 +48,7 @@ impl Application for MyApp {
         illustrations.insert(ctx, "explosion", "explosion.png");
         ctx.theme.brand.illustrations = illustrations;
 
-        let game = Games::Galaga.init(ctx);
+        let game = Games::Airstrike.init(ctx);
         Box::new(Interface::new(ctx, game, None))
     }
 }
@@ -56,13 +56,13 @@ impl Application for MyApp {
 start!(MyApp);
 
 enum Games {
-    Galaga
+    Airstrike
 }
 
 impl Games {
     pub fn init(&self, ctx: &mut Context) -> Box<dyn AppPage> {
         match self {
-            Games::Galaga => Box::new(Airstrike::new(ctx, None))
+            Games::Airstrike => Box::new(Airstrike::new(ctx, None))
         }
     }
 }
