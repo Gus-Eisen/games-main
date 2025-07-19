@@ -16,7 +16,7 @@ use pelican_ui::include_assets;
 use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 
-use crate::game_collection::galaga_game::galaga::Airstrike;
+use crate::game_collection::galaga_game::airstrike::Airstrike;
 use crate::game_collection::galaga_game::player::Player;
 use crate::game_collection::galaga_game::server::{ArduinoServer, GameAction};
 

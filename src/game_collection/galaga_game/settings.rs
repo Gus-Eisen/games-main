@@ -11,7 +11,7 @@ use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 
 use crate::game_collection::galaga_game::events::{AdjustPressureEvent, ToggleFliesShoot, ToggleAutoMove, ToggleAutoShoot, ToggleInvincibility};
-use crate::game_collection::galaga_game::galaga::{GameState, Airstrike};
+use crate::game_collection::galaga_game::airstrike::{GameState, Airstrike};
 
 #[derive(Debug, Component)]
 pub struct Settings(Stack, Page, #[skip] Option<Gameboard>);

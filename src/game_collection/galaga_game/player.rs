@@ -9,7 +9,7 @@ use pelican_game_engine::{AspectRatio, Sprite, Gameboard, SpriteState, SpriteAct
 use crate::game_collection::galaga_game::npcs::Explosion;
 
 use crate::game_collection::galaga_game::npcs::Bullet;
-use crate::game_collection::galaga_game::galaga::GameState;
+use crate::game_collection::galaga_game::airstrike::GameState;
 
 #[derive(Default, Debug, Clone)]
 // Fields: SpriteState, Vec<SpriteAction>, lives (u32), auto_shoot_timer (Option<Instant>), auto_move_enabled (bool), auto_move_direction (bool - true=right, false=left)

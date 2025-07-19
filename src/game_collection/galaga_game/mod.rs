@@ -1,4 +1,4 @@
-pub mod galaga;
+pub mod airstrike;
 mod components;
 pub mod player;
 mod npcs;
