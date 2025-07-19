@@ -35,8 +35,9 @@ impl Plugins for MyApp {
 }
 
 impl Application for MyApp {
+    //looks like where I declare all sprites that will be used.
     async fn new(ctx: &mut Context) -> Box<dyn Drawable> {
-        
+        //which folder I can load assets from.
         ctx.assets.include_assets(include_assets!("./assets"));
         let mut illustrations = ctx.theme.brand.illustrations.clone();
         illustrations.insert(ctx, "spaceship", "spaceship.png");

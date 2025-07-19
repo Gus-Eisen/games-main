@@ -110,10 +110,11 @@ impl Airstrike {
         let score = gamestate.score.to_string();
         ctx.state().set(gamestate);
         let settings = IconButton::navigation(ctx, "settings", |ctx: &mut Context| ctx.trigger_event(NavigateEvent(0)));
-        let header = Header::stack(ctx, None, "Galaga", Some(settings));
+        let header = Header::stack(ctx, None, "Airstrike", Some(settings));
         let text_size = ctx.theme.fonts.size.h3;
         let score = format!("SCORE: {}", score);
         let text = ExpandableText::new(ctx, &score, TextStyle::Heading, text_size, Align::Left, None);
+        //IDK what float 24.0 does.
         Airstrike(Column::center(24.0), header, text, Some(gameboard))
     }
 
