@@ -66,8 +66,8 @@ impl GameState {
 }
 
 #[derive(Debug, Component)]
-pub struct Galaga(Column, Header, ExpandableText, Option<Gameboard>);
-impl OnEvent for Galaga {
+pub struct Airstrike(Column, Header, ExpandableText, Option<Gameboard>);
+impl OnEvent for Airstrike {
     fn on_event(&mut self, ctx: &mut Context, event: &mut dyn Event) -> bool {
         if let Some(TickEvent) = event.downcast_ref::<TickEvent>() {
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
@@ -78,7 +78,7 @@ impl OnEvent for Galaga {
     }
 }
 
-impl AppPage for Galaga {
+impl AppPage for Airstrike {
     fn has_nav(&self) -> bool {false}
     fn navigate(mut self: Box<Self>, ctx: &mut Context, index: usize) -> Result<Box<dyn AppPage>, Box<dyn AppPage>> {
         match index {
@@ -88,7 +88,7 @@ impl AppPage for Galaga {
     }
 }
 
-impl Galaga {
+impl Airstrike {
     pub fn new(ctx: &mut Context, gameboard: Option<Gameboard>) -> Self {
         let mut gameboard = gameboard.unwrap_or(Gameboard::new(ctx, AspectRatio::OneOne, Box::new(Self::on_event)));
 
@@ -113,8 +113,8 @@ impl Galaga {
         let header = Header::stack(ctx, None, "Galaga", Some(settings));
         let text_size = ctx.theme.fonts.size.h3;
         let score = format!("SCORE: {}", score);
-        let text = ExpandableText::new(ctx, &score, TextStyle::Heading, text_size, Align::Center, None);
-        Galaga(Column::center(24.0), header, text, Some(gameboard))
+        let text = ExpandableText::new(ctx, &score, TextStyle::Heading, text_size, Align::Left, None);
+        Airstrike(Column::center(24.0), header, text, Some(gameboard))
     }
 
     fn on_event(gameboard: &mut Gameboard, ctx: &mut Context, event: &mut dyn Event) -> bool {
@@ -158,7 +158,7 @@ impl Galaga {
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
             gamestate.player = player;
 
-            let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
+            // let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
             //let mut enemies = gamestate.enemies.clone();
             
             // if enemies.is_empty() {

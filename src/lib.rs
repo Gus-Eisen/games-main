@@ -16,7 +16,7 @@ use pelican_ui::include_assets;
 use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 
-use crate::game_collection::galaga_game::galaga::Galaga;
+use crate::game_collection::galaga_game::galaga::Airstrike;
 use crate::game_collection::galaga_game::player::Player;
 use crate::game_collection::galaga_game::server::{ArduinoServer, GameAction};
 
@@ -62,7 +62,7 @@ enum Games {
 impl Games {
     pub fn init(&self, ctx: &mut Context) -> Box<dyn AppPage> {
         match self {
-            Games::Galaga => Box::new(Galaga::new(ctx, None))
+            Games::Galaga => Box::new(Airstrike::new(ctx, None))
         }
     }
 }

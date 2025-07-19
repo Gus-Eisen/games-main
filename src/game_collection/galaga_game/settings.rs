@@ -11,7 +11,7 @@ use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 
 use crate::game_collection::galaga_game::events::{AdjustPressureEvent, ToggleFliesShoot, ToggleAutoMove, ToggleAutoShoot, ToggleInvincibility};
-use crate::game_collection::galaga_game::galaga::{GameState, Galaga};
+use crate::game_collection::galaga_game::galaga::{GameState, Airstrike};
 
 #[derive(Debug, Component)]
 pub struct Settings(Stack, Page, #[skip] Option<Gameboard>);
@@ -66,7 +66,7 @@ impl AppPage for Settings {
     fn has_nav(&self) -> bool {false}
     fn navigate(mut self: Box<Self>, ctx: &mut Context, index: usize) -> Result<Box<dyn AppPage>, Box<dyn AppPage>> {
         match index {
-            0 => Ok(Box::new(Galaga::new(ctx, Some(self.2.take().unwrap())))),
+            0 => Ok(Box::new(Airstrike::new(ctx, Some(self.2.take().unwrap())))),
             _ => Err(self)
         }
     }
