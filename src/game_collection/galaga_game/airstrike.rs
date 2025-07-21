@@ -90,7 +90,7 @@ impl AppPage for Airstrike {
 
 impl Airstrike {
     pub fn new(ctx: &mut Context, gameboard: Option<Gameboard>) -> Self {
-        let mut gameboard = gameboard.unwrap_or(Gameboard::new(ctx, AspectRatio::OneOne, Box::new(Self::on_event)));
+        let mut gameboard = gameboard.unwrap_or(Gameboard::new(ctx, AspectRatio::SixteenNine, Box::new(Self::on_event)));
 
         let mut gamestate = match ctx.state().get::<GameState>() {
             Some(state) => state.clone(),

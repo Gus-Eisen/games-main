@@ -18,7 +18,7 @@ pub struct Player(SpriteState, Vec<SpriteAction>, u32, Option<Instant>, bool, bo
 impl Player {
     //Sprite::new requires ctx, an id for the image, an id for the png file, the offset numbers, and the offset positions.
     pub fn new(ctx: &mut Context, gameboard: &mut Gameboard) -> Self {
-        //Think of Offset as predefined x,y cords for intial player position.
+        //Think of Offset as predefined x,y coords for initial player position.
         let player = Sprite::new(ctx, "player", "northrop", (50.0, 50.0), (Offset::Center, Offset::Center));
         //gameboard is the container of everything- it has a width and height essentially
         gameboard.insert_sprite(ctx, player);
