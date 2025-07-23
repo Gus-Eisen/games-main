@@ -11,8 +11,6 @@ use std::time::{Duration, Instant};
 
 #[derive(Debug, Clone)]
 pub enum GameAction {
-    MoveLeft,
-    MoveRight,
     MoveUp,
     MoveDown,
     Shoot,
@@ -98,22 +96,6 @@ impl ArduinoServer {
                             if let Some(action) = json.get("action") {
                                 if let Some(action_str) = action.as_str() {
                                     let game_action = match action_str {
-                                        "peakleft" => {
-                                            if let Some(value) = json.get("value") {
-                                                println!("   Left movement value: {}", value);
-                                                Some(GameAction::MoveLeft)
-                                            } else {
-                                                None
-                                            }
-                                        }
-                                        "peakright" => {
-                                            if let Some(value) = json.get("value") {
-                                                println!("   Right movement value: {}", value);
-                                                Some(GameAction::MoveRight)
-                                            } else {
-                                                None
-                                            }
-                                        }
                                         "peakshoot" => {
                                             if let Some(value) = json.get("value") {
                                                 println!("   Shoot value: {}", value);

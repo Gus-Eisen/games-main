@@ -126,11 +126,6 @@ impl Airstrike {
                 if let Ok(mut queue) = action_queue.lock() {
                     while let Some(action) = queue.pop_front() {
                         match action {
-                            GameAction::MoveLeft => {
-                                if let Some(ref mut player) = gamestate.player {
-                                    player.set_state(SpriteState::MovingLeft);
-                                }
-                            }
                             GameAction::MoveUp => {
                                 if let Some(ref mut player) = gamestate.player {
                                     player.set_state(SpriteState::MovingUp);
@@ -139,11 +134,6 @@ impl Airstrike {
                             GameAction::MoveDown => {
                                 if let Some(ref mut player) = gamestate.player {
                                     player.set_state(SpriteState::MovingDown);
-                                }
-                            }
-                            GameAction::MoveRight => {
-                                if let Some(ref mut player) = gamestate.player {
-                                    player.set_state(SpriteState::MovingRight);
                                 }
                             }
                             GameAction::Shoot => {
@@ -279,22 +269,10 @@ impl Airstrike {
             // Keep keyboard controls as backup/alternative input
             let gamestate = ctx.state().get_mut_or_default::<GameState>();
             match keyboard_event {
-                KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowLeft) } => {
-                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::MovingLeft));
-                }
-                KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowLeft) } => {
-                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
-                }
                 KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowDown) } => {
                     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::MovingDown));
                 }
                 KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowDown) } => {
-                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
-                }
-                KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowRight) } => {
-                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::MovingRight));
-                }
-                KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowRight) } => {
                     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
                 }
                 KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowUp) } => {
