@@ -13,6 +13,8 @@ use std::time::{Duration, Instant};
 pub enum GameAction {
     MoveLeft,
     MoveRight,
+    MoveUp,
+    MoveDown,
     Shoot,
     StopMoving,
 }

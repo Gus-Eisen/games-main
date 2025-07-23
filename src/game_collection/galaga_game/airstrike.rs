@@ -131,6 +131,16 @@ impl Airstrike {
                                     player.set_state(SpriteState::MovingLeft);
                                 }
                             }
+                            GameAction::MoveUp => {
+                                if let Some(ref mut player) = gamestate.player {
+                                    player.set_state(SpriteState::MovingUp);
+                                }
+                            }
+                            GameAction::MoveDown => {
+                                if let Some(ref mut player) = gamestate.player {
+                                    player.set_state(SpriteState::MovingDown);
+                                }
+                            }
                             GameAction::MoveRight => {
                                 if let Some(ref mut player) = gamestate.player {
                                     player.set_state(SpriteState::MovingRight);
@@ -273,6 +283,12 @@ impl Airstrike {
                     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::MovingLeft));
                 }
                 KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowLeft) } => {
+                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
+                }
+                KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowDown) } => {
+                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::MovingDown));
+                }
+                KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowDown) } => {
                     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
                 }
                 KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowRight) } => {

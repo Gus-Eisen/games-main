@@ -11,6 +11,8 @@ use crate::game_collection::galaga_game::npcs::Explosion;
 use crate::game_collection::galaga_game::npcs::Bullet;
 use crate::game_collection::galaga_game::airstrike::GameState;
 
+const standard_player_movement_amt: f32 = 2.0;
+
 #[derive(Default, Debug, Clone)]
 // Fields: SpriteState, Vec<SpriteAction>, lives (u32), auto_shoot_timer (Option<Instant>), auto_move_enabled (bool), auto_move_direction (bool - true=right, false=left)
 pub struct Player(SpriteState, Vec<SpriteAction>, u32, Option<Instant>, bool, bool, Option<Instant>);
@@ -110,10 +112,13 @@ impl Player {
             match self.0 {
                 SpriteState::Idle => {},
                 SpriteState::MovingLeft => if player.position(ctx).0 > 0.0 {
-                    player.adjustments().0 -= 2.0;
+                    player.adjustments().0 -= standard_player_movement_amt;
                 },
                 SpriteState::MovingRight => if player.position(ctx).0 < board_width - player.dimensions().0 {
-                    player.adjustments().0 += 2.0;
+                    player.adjustments().0 += standard_player_movement_amt;
+                },
+                SpriteState::MovingDown => {
+                    player.adjustments().1 += standard_player_movement_amt;
                 },
                 _ => {}
             }
