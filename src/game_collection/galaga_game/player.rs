@@ -77,6 +77,7 @@ impl Player {
         }
         
         let board_width = gameboard.0.size(ctx).0;
+        let board_height = gameboard.0.size((ctx)).1;
         let player_opt = gameboard.get_sprite_by_id("player");
         
         // If player doesn't exist and we're not waiting to respawn, something went wrong
@@ -111,13 +112,7 @@ impl Player {
         if !gamestate.player_auto_move {
             match self.0 {
                 SpriteState::Idle => {},
-                SpriteState::MovingLeft => if player.position(ctx).0 > 0.0 {
-                    player.adjustments().0 -= standard_player_movement_amt;
-                },
-                SpriteState::MovingRight => if player.position(ctx).0 < board_width - player.dimensions().0 {
-                    player.adjustments().0 += standard_player_movement_amt;
-                },
-                SpriteState::MovingDown => {
+                SpriteState::MovingDown => if player.position(ctx).1 < board_height - player.dimensions().1 {
                     player.adjustments().1 += standard_player_movement_amt;
                 },
                 _ => {}
