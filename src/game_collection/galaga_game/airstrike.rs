@@ -276,7 +276,10 @@ impl Airstrike {
                     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
                 }
                 KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::ArrowUp) } => {
-                    gamestate.player.as_mut().map(|p| p.action(SpriteAction::Shoot));
+                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::MovingUp));
+                }
+                KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowUp) } => {
+                    gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
                 }
                 _ => {}
             }

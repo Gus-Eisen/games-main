@@ -11,7 +11,7 @@ use crate::game_collection::galaga_game::npcs::Explosion;
 use crate::game_collection::galaga_game::npcs::Bullet;
 use crate::game_collection::galaga_game::airstrike::GameState;
 
-const standard_player_movement_amt: f32 = 2.0;
+const STANDARD_PLAYER_MOVEMENT_AMT: f32 = 2.0;
 
 #[derive(Default, Debug, Clone)]
 // Fields: SpriteState, Vec<SpriteAction>, lives (u32), auto_shoot_timer (Option<Instant>), auto_move_enabled (bool), auto_move_direction (bool - true=right, false=left)
@@ -113,7 +113,10 @@ impl Player {
             match self.0 {
                 SpriteState::Idle => {},
                 SpriteState::MovingDown => if player.position(ctx).1 < board_height - player.dimensions().1 {
-                    player.adjustments().1 += standard_player_movement_amt;
+                    player.adjustments().1 += STANDARD_PLAYER_MOVEMENT_AMT;
+                },
+                SpriteState::MovingUp => if player.position(ctx).1 > 0.0 {
+                    player.adjustments().1 -= STANDARD_PLAYER_MOVEMENT_AMT;
                 },
                 _ => {}
             }
@@ -170,12 +173,13 @@ impl Player {
                     self.2 = 3;
                     false
                 },
-                SpriteAction::Shoot => {
-                    let bullet = Bullet::new(ctx, gameboard, SpriteState::MovingUp, pos.0 + ((dim.0/2.0) - 7.5), pos.1 - 20.0);
-                    let gamestate = ctx.state().get_mut_or_default::<GameState>();
-                    gamestate.bullets.push(bullet);
-                    false
-                },
+                //look here for shooting
+                // SpriteAction::Shoot => {
+                //     let bullet = Bullet::new(ctx, gameboard, SpriteState::MovingUp, pos.0 + ((dim.0/2.0) - 7.5), pos.1 - 20.0);
+                //     let gamestate = ctx.state().get_mut_or_default::<GameState>();
+                //     gamestate.bullets.push(bullet);
+                //     false
+                // },
                 _ => true,
             }
         });
