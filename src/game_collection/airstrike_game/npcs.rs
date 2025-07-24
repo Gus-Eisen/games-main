@@ -10,7 +10,7 @@ use pelican_game_engine::{AspectRatio, Sprite, Gameboard, SpriteState, SpriteAct
 use std::time::{Duration, Instant};
 use rand::Rng;
 
-use crate::game_collection::galaga_game::airstrike::GameState;
+use crate::game_collection::airstrike_game::airstrike::GameState;
 
 #[derive(Default, Debug, Clone)]
 pub struct Bullet(SpriteState, String);

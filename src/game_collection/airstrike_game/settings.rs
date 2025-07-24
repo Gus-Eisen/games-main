@@ -10,8 +10,8 @@ use pelican_game_engine::{AspectRatio, Sprite, Gameboard, SpriteState, SpriteAct
 use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
 
-use crate::game_collection::galaga_game::events::{AdjustPressureEvent, ToggleFliesShoot, ToggleAutoMove, ToggleAutoShoot, ToggleInvincibility};
-use crate::game_collection::galaga_game::airstrike::{GameState, Airstrike};
+use crate::game_collection::airstrike_game::events::{AdjustPressureEvent, ToggleFliesShoot, ToggleAutoMove, ToggleAutoShoot, ToggleInvincibility};
+use crate::game_collection::airstrike_game::airstrike::{GameState, Airstrike};
 
 #[derive(Debug, Component)]
 pub struct Settings(Stack, Page, #[skip] Option<Gameboard>);

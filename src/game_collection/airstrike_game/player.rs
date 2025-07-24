@@ -6,10 +6,10 @@ use pelican_ui::layout::{Area, SizeRequest, Layout};
 use pelican_ui::{Context, Component};
 use pelican_ui_std::{Stack, Content, Header, Bumper, Page, Button, Offset, TextStyle, Text, AppPage, Size, Padding, Column, Wrap, Row, ButtonSize, ButtonWidth, ButtonStyle, ButtonState, IconButton, NavigateEvent, DataItem};
 use pelican_game_engine::{AspectRatio, Sprite, Gameboard, SpriteState, SpriteAction};
-use crate::game_collection::galaga_game::npcs::Explosion;
+use crate::game_collection::airstrike_game::npcs::Explosion;
 
-use crate::game_collection::galaga_game::npcs::Bullet;
-use crate::game_collection::galaga_game::airstrike::GameState;
+use crate::game_collection::airstrike_game::npcs::Bullet;
+use crate::game_collection::airstrike_game::airstrike::GameState;
 
 const STANDARD_PLAYER_MOVEMENT_AMT: f32 = 2.0;
 const STD_F117_SIZE: (f32, f32) = (144.0, 20.0);

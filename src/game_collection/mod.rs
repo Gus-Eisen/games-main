@@ -1,1 +1,1 @@
-pub mod galaga_game;
+pub mod airstrike_game;
