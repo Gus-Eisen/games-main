@@ -11,7 +11,7 @@ use crate::game_collection::airstrike_game::npcs::Explosion;
 use crate::game_collection::airstrike_game::npcs::Bullet;
 use crate::game_collection::airstrike_game::airstrike::GameState;
 
-const STANDARD_PLAYER_MOVEMENT_AMT: f32 = 2.0;
+const STD_PLAYER_MOVEMENT_AMT: f32 = 2.0;
 const STD_F117_SIZE: (f32, f32) = (144.0, 20.0);
 
 #[derive(Default, Debug, Clone)]
@@ -96,13 +96,13 @@ impl Player {
             
             if self.5 { 
                 if player_pos < board_width - player_width {
-                    player.adjustments().0 += STANDARD_PLAYER_MOVEMENT_AMT;
+                    player.adjustments().0 += STD_PLAYER_MOVEMENT_AMT;
                 } else {
                     self.5 = false;
                 }
             } else { 
                 if player_pos > 0.0 {
-                    player.adjustments().0 -= STANDARD_PLAYER_MOVEMENT_AMT;
+                    player.adjustments().0 -= STD_PLAYER_MOVEMENT_AMT;
                 } else {
                     self.5 = true;
                 }
@@ -114,10 +114,10 @@ impl Player {
             match self.0 {
                 SpriteState::Idle => {},
                 SpriteState::MovingDown => if player.position(ctx).1 < board_height - player.dimensions().1 {
-                    player.adjustments().1 += STANDARD_PLAYER_MOVEMENT_AMT;
+                    player.adjustments().1 += STD_PLAYER_MOVEMENT_AMT;
                 },
                 SpriteState::MovingUp => if player.position(ctx).1 > 0.0 {
-                    player.adjustments().1 -= STANDARD_PLAYER_MOVEMENT_AMT;
+                    player.adjustments().1 -= STD_PLAYER_MOVEMENT_AMT;
                 },
                 _ => {}
             }

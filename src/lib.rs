@@ -15,6 +15,8 @@ use image::{load_from_memory, RgbaImage};
 use pelican_ui::include_assets;
 use std::sync::{Arc, Mutex};
 use std::collections::VecDeque;
+//TODO: delete commented out code if lib.rs is not required for colored background.
+//use pelican_ui::drawable::Color;
 
 use crate::game_collection::airstrike_game::airstrike::Airstrike;
 use crate::game_collection::airstrike_game::player::Player;
