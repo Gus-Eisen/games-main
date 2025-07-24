@@ -36,7 +36,7 @@ impl Player {
         }
         
         for i in 0..self.2 {
-            let life_sprite = Sprite::new(ctx, &format!("player_life_{}", i), "f117", (25.0, 25.0),
+            let life_sprite = Sprite::new(ctx, &format!("player_life_{}", i), "player_lives", (25.0, 25.0),
                 (Offset::Static((i as f32 * 5.0) + (i as f32 * 25.0)), Offset::Static(10.0)), 
             );
             gameboard.insert_sprite(ctx, life_sprite);

@@ -48,6 +48,7 @@ impl Application for MyApp {
         illustrations.insert(ctx, "bullet_blue", "bullet_blue.png");
         illustrations.insert(ctx, "explosion", "explosion.png");
         illustrations.insert(ctx, "f117", "f117.png");
+        illustrations.insert(ctx, "player_lives", "player_lives.png");
         ctx.theme.brand.illustrations = illustrations;
 
         let game = Games::Airstrike.init(ctx);
