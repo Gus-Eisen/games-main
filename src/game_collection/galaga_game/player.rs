@@ -12,6 +12,7 @@ use crate::game_collection::galaga_game::npcs::Bullet;
 use crate::game_collection::galaga_game::airstrike::GameState;
 
 const STANDARD_PLAYER_MOVEMENT_AMT: f32 = 2.0;
+const STD_F117_SIZE: (f32, f32) = (144.0, 20.0);
 
 #[derive(Default, Debug, Clone)]
 // Fields: SpriteState, Vec<SpriteAction>, lives (u32), auto_shoot_timer (Option<Instant>), auto_move_enabled (bool), auto_move_direction (bool - true=right, false=left)
@@ -21,7 +22,7 @@ impl Player {
     //Sprite::new requires ctx, an id for the image, an id for the png file, the offset numbers, and the offset positions.
     pub fn new(ctx: &mut Context, gameboard: &mut Gameboard) -> Self {
         //Think of Offset as predefined x,y coords for initial player position.
-        let player = Sprite::new(ctx, "player", "northrop", (50.0, 50.0), (Offset::Center, Offset::Center));
+        let player = Sprite::new(ctx, "player", "f117", STD_F117_SIZE, (Offset::Center, Offset::Center));
         //gameboard is the container of everything- it has a width and height essentially
         gameboard.insert_sprite(ctx, player);
 
@@ -35,7 +36,7 @@ impl Player {
         }
         
         for i in 0..self.2 {
-            let life_sprite = Sprite::new(ctx, &format!("player_life_{}", i), "northrop", (25.0, 25.0),
+            let life_sprite = Sprite::new(ctx, &format!("player_life_{}", i), "f117", (25.0, 25.0),
                 (Offset::Static((i as f32 * 5.0) + (i as f32 * 25.0)), Offset::Static(10.0)), 
             );
             gameboard.insert_sprite(ctx, life_sprite);
@@ -65,7 +66,7 @@ impl Player {
         if let Some(respawn_time) = self.6 {
             if respawn_time.elapsed().as_secs() >= 2 {
                 // Respawn the player
-                let new_player = Sprite::new(ctx, "player", "northrop", (50.0, 50.0), (Offset::Center, Offset::End));
+                let new_player = Sprite::new(ctx, "player", "f117", STD_F117_SIZE, (Offset::Center, Offset::End));
                 gameboard.insert_sprite(ctx, new_player);
                 self.0 = SpriteState::Idle;
                 self.6 = None;
