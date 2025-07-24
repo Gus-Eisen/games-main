@@ -95,13 +95,13 @@ impl Player {
             
             if self.5 { 
                 if player_pos < board_width - player_width {
-                    player.adjustments().0 += 2.0;
+                    player.adjustments().0 += STANDARD_PLAYER_MOVEMENT_AMT;
                 } else {
                     self.5 = false;
                 }
             } else { 
                 if player_pos > 0.0 {
-                    player.adjustments().0 -= 2.0;
+                    player.adjustments().0 -= STANDARD_PLAYER_MOVEMENT_AMT;
                 } else {
                     self.5 = true;
                 }
