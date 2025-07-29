@@ -98,9 +98,10 @@ impl Airstrike {
         let blue = Color::from_hex("#3281a8", 255);
         gameboard.1.set_background_border_color(blue);
         // let blue = Color::from_hex("#3281a8", 255);
-        // gameboard.1.set_background_border_color(blue);
-        let blue_background_sprite = Sprite::new(ctx, "background_blue", "background_blue", (10.0, 10.0), (Offset::Start, Offset::Center));
-        gameboard.insert_sprite(ctx, blue_background_sprite);
+        // gameboard.1.
+        // // gameboard.1.set_background_border_color(blue);
+        // let blue_background_sprite = Sprite::new(ctx, "background_blue", "background_blue", gameboard_size, (Offset::Center, Offset::Center));
+        // gameboard.insert_sprite(ctx, blue_background_sprite);
         let mut gamestate = match ctx.state().get::<GameState>() {
             Some(state) => state.clone(),
             None => {
@@ -130,7 +131,6 @@ impl Airstrike {
     fn on_event(gameboard: &mut Gameboard, ctx: &mut Context, event: &mut dyn Event) -> bool {
         if let Some(TickEvent) = event.downcast_ref::<TickEvent>() {
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
-            
             if let Some(ref action_queue) = gamestate.action_queue.clone() {
                 if let Ok(mut queue) = action_queue.lock() {
                     while let Some(action) = queue.pop_front() {
@@ -159,18 +159,18 @@ impl Airstrike {
                     }
                 }
             }
-            
+
             let mut player = gamestate.player.clone();
-    
+
             player.as_mut().map(|p| p.player_lives_display(ctx, gameboard));
             player.as_mut().map(|p| p.react(ctx, gameboard));
-            
+
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
             gamestate.player = player;
 
             // let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
             //let mut enemies = gamestate.enemies.clone();
-            
+
             // if enemies.is_empty() {
             //     let patterns = [
             //         EnemyPatterns::Star,
@@ -201,7 +201,7 @@ impl Airstrike {
             let mut explosions = gamestate.explosions.clone();
 
             explosions.retain_mut(|e| e.react(ctx, gameboard));
-            
+
             let gamestate = ctx.state().get_mut_or_default::<GameState>();
             gamestate.explosions = explosions;
 
@@ -259,7 +259,7 @@ impl Airstrike {
                     let gamestate = &mut ctx.state().get_mut_or_default::<GameState>();
                     gamestate.explosions.push(explosion);
                 }
-            }else if a.starts_with("bullet") && b.starts_with("missile") || b.starts_with("bullet") && a.starts_with("missile"){ // player bullet hit enemy ship
+            } else if a.starts_with("bullet") && b.starts_with("missile") || b.starts_with("bullet") && a.starts_with("missile") { // player bullet hit enemy ship
                 let bullet = gameboard.get_sprite_by_id(b).unwrap();
                 let pos = bullet.position(ctx).clone();
                 let dim = bullet.dimensions().clone();
@@ -274,7 +274,7 @@ impl Airstrike {
                 let gamestate = &mut ctx.state().get_mut_or_default::<GameState>();
                 gamestate.explosions.push(explosion);
             }
-        } else if let Some(keyboard_event) = event.downcast_ref::<KeyboardEvent>() {
+    } else if let Some(keyboard_event) = event.downcast_ref::<KeyboardEvent>() {
             // Keep keyboard controls as backup/alternative input
             let gamestate = ctx.state().get_mut_or_default::<GameState>();
             match keyboard_event {
@@ -290,6 +290,12 @@ impl Airstrike {
                 KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowUp) } => {
                     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
                 }
+                KeyboardEvent { state: KeyboardState::Pressed, key: Key::Named(NamedKey::Space) } => {
+                    gamestate.player.as_mut().map(|p| p.action(SpriteAction::Shoot));
+                }
+                // KeyboardEvent { state: KeyboardState::Released, key: Key::Named(NamedKey::ArrowUp) } => {
+                //     gamestate.player.as_mut().map(|p| p.set_state(SpriteState::Idle));
+                // }
                 _ => {}
             }
         }
