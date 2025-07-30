@@ -21,8 +21,8 @@ impl Bullet {
         let c = gameboard.2.iter().filter(|s| s.id().starts_with(prefix)).last().map(|s| s.id().strip_prefix(prefix).unwrap()).unwrap_or("0");
         let id = format!("{}{}", prefix, c.parse::<usize>().unwrap()+1);
         println!("CREATED BULLET {:?}", id);
-        let image = if state == SpriteState::MovingUp {"bullet_blue"} else {"bullet_downward"};
-        let bullet = Sprite::new(ctx, &id, image, (15.0, 15.0), (Offset::Static(x), Offset::Static(y)));
+        let image = if state == SpriteState::MovingUp {"bullet_blue"} else {"bomb"};
+        let bullet = Sprite::new(ctx, &id, image, (31.6, 10.0), (Offset::Static(x), Offset::Static(y)));
         gameboard.insert_sprite(ctx, bullet);
         Bullet(state, id)
     }
