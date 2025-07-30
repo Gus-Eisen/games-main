@@ -176,7 +176,7 @@ impl Player {
                 },
                 //look here for shooting
                 SpriteAction::Shoot => {
-                    let bullet = Bullet::new(ctx, gameboard, SpriteState::MovingUp, pos.0 + ((dim.0/2.0) - 7.5), pos.1 - 20.0);
+                    let bullet = Bullet::new(ctx, gameboard, SpriteState::MovingDown, pos.0 + ((dim.0/2.0) - 7.5), pos.1 + 20.0);
                     let gamestate = ctx.state().get_mut_or_default::<GameState>();
                     gamestate.bullets.push(bullet);
                     false
