@@ -2,7 +2,7 @@ use std::any::Any;
 #[cfg(target_arch = "aarch64")]
 use std::arch::aarch64::__crc32b;
 use pelican_ui::events::{Event, Key, KeyboardEvent, KeyboardState, NamedKey, OnEvent, TickEvent};
-use pelican_ui::drawable::{Align, Drawable, Component, ShapeType};
+use pelican_ui::drawable::{Align, Drawable, Component, ShapeType, Shape};
 use pelican_ui::layout::{Area, SizeRequest, Layout};
 use pelican_ui::{Context, Component, ColorResources};
 use pelican_ui_std::{Stack, Content, Header, Bumper, Page, Button, Offset, ExpandableText, TextStyle, Text, AppPage, Size, Padding, Column, Wrap, Row, ButtonSize, ButtonWidth, ButtonStyle, ButtonState, IconButton, NavigateEvent, DataItem};
@@ -94,14 +94,16 @@ impl AppPage for Airstrike {
 impl Airstrike {
     pub fn new(ctx: &mut Context, gameboard: Option<Gameboard>) -> Self {
         let mut gameboard = gameboard.unwrap_or(Gameboard::new(ctx, AspectRatio::SixteenNine, Box::new(Self::on_event)));
-        let gameboard_size = gameboard.0.size(ctx);
-        let blue = Color::from_hex("#3281a8", 255);
-        gameboard.1.set_background_border_color(blue);
         // let blue = Color::from_hex("#3281a8", 255);
-        // gameboard.1.
+        // let rectangle = Rectangle::new(blue);
+
+        // let blue = Color::from_hex("#3281a8", 255);
+        // gameboard.1.set_background_border_color(blue);
         // // gameboard.1.set_background_border_color(blue);
-        // let blue_background_sprite = Sprite::new(ctx, "background_blue", "background_blue", gameboard_size, (Offset::Center, Offset::Center));
-        // gameboard.insert_sprite(ctx, blue_background_sprite);
+        // let gameboard_size = gameboard.0.size(ctx);
+        // println!("Gameboard size is {:?}", gameboard_size);
+        let background_sprite = Sprite::new(ctx, "background_blue", "background_blue", (1412.0, 794.0), (Offset::Start, Offset::Start));
+        gameboard.insert_sprite(ctx, background_sprite);
         let mut gamestate = match ctx.state().get::<GameState>() {
             Some(state) => state.clone(),
             None => {
