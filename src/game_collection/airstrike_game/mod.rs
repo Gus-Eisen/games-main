@@ -5,3 +5,4 @@ mod npcs;
 pub mod server;
 mod events;
 mod settings;
+mod terrain;
