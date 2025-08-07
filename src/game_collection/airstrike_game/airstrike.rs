@@ -17,6 +17,7 @@ use crate::game_collection::airstrike_game::player::Player;
 use crate::game_collection::airstrike_game::npcs::{Enemy, EnemyPatterns, Bullet, Explosion};
 use crate::game_collection::airstrike_game::server::GameAction;
 use crate::game_collection::airstrike_game::settings::Settings;
+use crate::game_collection::airstrike_game::terrain::Terrain;
 
 use std::time::Instant;
 use rand::thread_rng;
@@ -38,6 +39,7 @@ pub struct GameState {
     pub player_auto_shoot: bool,
     pub player_invincible: bool,
     pub score: u32,
+    pub terrain: Terrain,
 }
 
 impl GameState {
@@ -59,7 +61,8 @@ impl GameState {
             player_auto_move: false,
             player_auto_shoot: false,
             player_invincible: false,
-            score: 0
+            score: 0,
+            terrain: Terrain::new(),
         }
     }
 
@@ -133,6 +136,8 @@ impl Airstrike {
     fn on_event(gameboard: &mut Gameboard, ctx: &mut Context, event: &mut dyn Event) -> bool {
         if let Some(TickEvent) = event.downcast_ref::<TickEvent>() {
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
+            gamestate.terrain.add_to_deque_of_id();
+            println!("Magic: {:?}", gamestate.terrain.deque_of_id);
             if let Some(ref action_queue) = gamestate.action_queue.clone() {
                 if let Ok(mut queue) = action_queue.lock() {
                     while let Some(action) = queue.pop_front() {

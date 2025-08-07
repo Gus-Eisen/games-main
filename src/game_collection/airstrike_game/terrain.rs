@@ -1,12 +1,13 @@
 use std::collections::VecDeque;
 use pelican_game_engine::Sprite;
 
+#[derive(Debug, Default, Clone)]
 pub struct Terrain {
     // sprite: Sprite
-    deque_of_id: VecDeque<u8>
+    pub deque_of_id: VecDeque<u64>
 }
 impl Terrain {
-    fn new(id: &str) -> Self {
+    pub fn new() -> Self {
         Self {
             deque_of_id: VecDeque::from(vec![0])
         }
