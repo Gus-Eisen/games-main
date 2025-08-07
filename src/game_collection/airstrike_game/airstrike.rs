@@ -138,6 +138,8 @@ impl Airstrike {
             let mut gamestate = ctx.state().get_mut_or_default::<GameState>();
             gamestate.terrain.add_to_deque_of_id();
             println!("Magic: {:?}", gamestate.terrain.deque_of_id);
+            let terrain_block = Terrain::terrain_block_sprite_generator(ctx, Terrain::get_deque_of_id(&gamestate.terrain));
+            gameboard.insert_sprite(ctx, terrain_block);
             if let Some(ref action_queue) = gamestate.action_queue.clone() {
                 if let Ok(mut queue) = action_queue.lock() {
                     while let Some(action) = queue.pop_front() {
